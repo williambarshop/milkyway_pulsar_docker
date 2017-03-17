@@ -23,7 +23,7 @@ WORKDIR C:/
 RUN git clone https://github.com/galaxyproject/pulsar && cd pulsar && powershell -command virtualenv venv
 WORKDIR C:/pulsar
 RUN C:/pulsar/venv/Scripts/activate.bat && pip install -r requirements.txt && pip install -r dev-requirements.txt && pip install pulsar-app && copy app.yml.sample app.yml
-RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
+RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample && sed -i "s/#private_token: changemeinproduction/private_token: ChangeThisPassphrase12345/g" app.yml
 
 #CMD ["C:/pulsar/venv/Scripts/activate.bat","&&","pulsar"]
 #RUN dir && dir
