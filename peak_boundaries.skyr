@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<views>
+  <view name="Peak_Boundaries" rowsource="pwiz.Skyline.Model.Databinding.Entities.Precursor" sublist="Results!*">
+    <column name="Results!*.Value.PeptideResult.ResultFile.FileName" />
+    <column name="Peptide.ModifiedSequence" />
+    <column name="Results!*.Value.MinStartTime" />
+    <column name="Results!*.Value.MaxEndTime" />
+    <column name="Charge" />
+    <column name="IsDecoy" caption="PrecursorIsDecoy" />
+    <filter column="Results!*.Value" opname="isnotnullorblank" />
+  </view>
+</views>

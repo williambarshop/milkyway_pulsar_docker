@@ -7,8 +7,10 @@ RUN powershell -nologo -noprofile -command "& { choco install git 7zip.install p
 #RUN powershell -nologo -noprofile -command "& {cd /; $client = New-Object System.Net.Webclient; $client.DownloadFile('https://skyline.ms/labkey/files/home/software/Skyline/daily/Skyline-daily-64_3_6_1_10556.zip','C:\Skyline-daily.zip'); }";
 
 
-COPY Skyline-daily C:\skyline-daily
-COPY SkylineDailyRunner.exe C:\skyline-daily\SkylineDailyRunner.exe
+COPY Skyline-daily C:\skyline
+COPY SkylineDailyRunner.exe C:\skyline\SkylineDailyRunner.exe
+COPY peak_boundaries.skyr C:\skyline\peak_boundaries.skyr
+COPY WOHL_MSSTATS_REPORT.skyr C:\skyline\WOHL_MSSTATS_REPORT.skyr
 
 #Let's set up the virtualenv and install pulsar.
 RUN pip install virtualenv
