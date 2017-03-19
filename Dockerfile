@@ -31,7 +31,13 @@ RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample && sed -i "s/
 
 #CMD ["powershell -nologo -noprofile -command \"& { C:/pulsar/venv/Scripts/activate.bat ; pulsar }\""]
 
+COPY pwiz-setup-3.0.10577-x86.exe C:\skyline\pwiz-setup-3.0.10577-x86.exe
+
+RUN msiexec /i C:\skyline\pwiz-setup-3.0.10577-x86.exe 
+
+
 CMD ["C:/pulsar/venv/Scripts/activate.bat && run.bat"]
+
 
 
 
