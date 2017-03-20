@@ -35,7 +35,7 @@ COPY pwiz-setup-3.0.10577-x86.exe C:\skyline\pwiz-setup-3.0.10577-x86.exe
 
 RUN msiexec /i C:\skyline\pwiz-setup-3.0.10577-x86.exe 
 
-
+RUN sed -i "s#        pattern = r\"(%s%s\S+)\" % (directory, sep)#        directory = directory.replace('\\','\\\\')\n        pattern = r\"(%s%s\S+)\" % (directory, sep)#g"
 CMD ["C:/pulsar/venv/Scripts/activate.bat && run.bat"]
 
 
