@@ -23,7 +23,7 @@ WORKDIR C:/
 RUN git clone https://github.com/galaxyproject/pulsar && cd pulsar && powershell -command virtualenv venv
 WORKDIR C:/pulsar
 RUN C:/pulsar/venv/Scripts/activate.bat && pip install -r requirements.txt && pip install -r dev-requirements.txt && pip install pulsar-app && copy app.yml.sample app.yml
-RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample && sed -i "s/#private_token: changemeinproduction/private_token: ChangeThisPassphrase12345/g" app.yml
+RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
 
 #CMD ["C:/pulsar/venv/Scripts/activate.bat","&&","pulsar"]
 #RUN dir && dir
@@ -31,9 +31,9 @@ RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample && sed -i "s/
 
 #CMD ["powershell -nologo -noprofile -command \"& { C:/pulsar/venv/Scripts/activate.bat ; pulsar }\""]
 
-COPY pwiz-setup-3.0.10577-x86.exe C:\skyline\pwiz-setup-3.0.10577-x86.exe
+COPY pwiz-setup-3.0.10577-x86.msi C:/skyline/pwiz-setup-3.0.10577-x86.msi
 
-RUN msiexec /i C:\skyline\pwiz-setup-3.0.10577-x86.exe 
+RUN msiexec /i C:/skyline/pwiz-setup-3.0.10577-x86.msi
 
 RUN sed -i "s#        pattern = r\"(%s%s\S+)\" % (directory, sep)#        directory = directory.replace('\\','\\\\')\n        pattern = r\"(%s%s\S+)\" % (directory, sep)#g"
 CMD ["C:/pulsar/venv/Scripts/activate.bat && run.bat"]
