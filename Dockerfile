@@ -36,7 +36,7 @@ WORKDIR C:/pwiz/
 
 RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz.msi","/qb"]
 WORKDIR C:/pulsar
-RUN rmdir C:/pwiz/ /S
+RUN rmdir /S /Q C:\pwiz
 RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files (x86)\ProteoWizard\ProteoWizard 3.0.10577\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 #Default startup command...
