@@ -8,8 +8,8 @@ RUN powershell -nologo -noprofile -command choco install git 7zip.install python
 WORKDIR C:/ 
 RUN mkdir skyline
 WORKDIR C:/skyline
-COPY Skyline-daily-64_3_6_1_10615.zip C:/skyline/
-RUN powershell -nologo -noprofile -command "& 'C:/Program Files/7-zip/7z.exe' e Skyline-daily-64_3_6_1_10615.zip -y"
+COPY Skyline-daily-64_3_6_1_10690.zip C:/skyline/
+RUN powershell -nologo -noprofile -command "& 'C:/Program Files/7-zip/7z.exe' e Skyline-daily-64_3_6_1_10690.zip -y"
 COPY WOHL_MSSTATS_REPORT.skyr C:/skyline/
 COPY peak_boundaries.skyr C:/skyline/
 
