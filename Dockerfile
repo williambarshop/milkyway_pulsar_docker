@@ -9,7 +9,8 @@ WORKDIR C:/
 RUN mkdir skyline
 WORKDIR C:/skyline
 COPY Skyline-daily-64_3_6_1_10690.zip C:/skyline/
-RUN powershell -nologo -noprofile -command "& 'C:/Program Files/7-zip/7z.exe' e Skyline-daily-64_3_6_1_10690.zip -y"
+RUN powershell -nologo -noprofile -command "& 'C:/Program Files/7-zip/7z.exe' e Skyline-daily-64_3_6_1_10690.zip -y ; del C:/skyline/Skyline-daily.exe.config"
+COPY Skyline-daily.exe.config C:/skyline/
 COPY WOHL_MSSTATS_REPORT.skyr C:/skyline/
 COPY peak_boundaries.skyr C:/skyline/
 
