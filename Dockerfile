@@ -1,8 +1,9 @@
-FROM microsoft/dotnet-framework:3.5
+﻿FROM microsoft/dotnet-framework:3.5
 MAINTAINER William Barshop, wbarshop@ucla.edu
 
 RUN ["powershell","-Command","iwr","https://chocolatey.org/install.ps1","-UseBasicParsing","|","iex"]
-RUN powershell -nologo -noprofile -command choco install git 7zip.install python2 nuget.commandline gow vcredist2008 vcredist2013 vcredist2015 --execution-timeout 3500 -y
+#RUN powershell -nologo -noprofile -command choco install 7zip.portable -y
+RUN powershell -nologo -noprofile -command choco install 7zip.portable git python2 nuget.commandline gow vcredist2008 vcredist2013 vcredist2015 --execution-timeout 3500 -y
 
 
 WORKDIR C:/ 
