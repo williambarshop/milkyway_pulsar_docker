@@ -27,7 +27,7 @@ WORKDIR C:/pulsar
 RUN C:/pulsar/venv/Scripts/activate.bat && pip install -r requirements.txt && pip install -r dev-requirements.txt && pip install pulsar-app xml2dict natsort pandas numpy uniprot_tools && copy app.yml.sample app.yml
 RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
 #Patch listed in https://github.com/galaxyproject/pulsar/issues/125 for directory issues...
-RUN sed -i "s#        pattern = r#        directory = directory.replace('\\\\','\\\\\\\\')\n        pattern = r#g" C:\\pulsar\\pulsar\\client\\staging\\up.py
+RUN sed -i "s#        pattern = r\"(#        directory = directory.replace('\\\\','\\\\\\\\')\n        pattern = r\"(#g" C:\\pulsar\\pulsar\\client\\staging\\up.py
 
 #RUN wget 'http://teamcity.labkey.org:8080/repository/download/bt36/.lastSuccessful/pwiz-setup-'$(wget -O- http://teamcity.labkey.org:8080/repository/download/bt36/.lastSuccessful/VERSION?guest=1)'-x86.msi?guest=1'
 
