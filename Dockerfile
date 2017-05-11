@@ -15,6 +15,8 @@ RUN del Skyline-daily.exe.config
 COPY Skyline-daily.exe.config C:/skyline/
 COPY WOHL_MSSTATS_REPORT.skyr C:/skyline/
 COPY peak_boundaries.skyr C:/skyline/
+RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\skyline\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
+
 
 #Let's set up the virtualenv and install pulsar.
 RUN pip install virtualenv
