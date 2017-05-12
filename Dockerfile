@@ -5,7 +5,7 @@ RUN ["powershell","-Command","iwr","https://chocolatey.org/install.ps1","-UseBas
 #RUN powershell -nologo -noprofile -command choco install 7zip.portable -y
 RUN powershell -nologo -noprofile -command choco install 7zip.portable git python2 nuget.commandline gow vcredist2008 vcredist2013 vcredist2015 --execution-timeout 3500 -y
 
-
+#Install skyline and add it to the path
 WORKDIR C:/ 
 RUN mkdir skyline
 WORKDIR C:/skyline
@@ -17,6 +17,9 @@ COPY WOHL_MSSTATS_REPORT.skyr C:/skyline/
 COPY peak_boundaries.skyr C:/skyline/
 RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\skyline\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
+#We're going to grab pigz and add it to the skyline folder to keep it in the path...
+RUN powershell -nologo -noprofile -command "& wget https://downloads.sourceforge.net/project/pigzforwindows/pigz-2.3-bin-win32.zip --no-check-certificate"
+RUN powershell -nologo -noprofile -command "& 7z.exe e pigz-2.3-bin-win32.zip -y"
 
 #Let's set up the virtualenv and install pulsar.
 RUN pip install virtualenv
