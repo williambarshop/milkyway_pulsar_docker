@@ -29,7 +29,7 @@ WORKDIR C:/
 RUN git clone https://github.com/galaxyproject/pulsar && cd pulsar && powershell -command virtualenv venv
 WORKDIR C:/pulsar
 #We'll set up Pulsar in this directory... and then alter the host IP access to the pulsar server.
-RUN C:/pulsar/venv/Scripts/activate.bat && pip install -r requirements.txt && pip install -r dev-requirements.txt && pip install pulsar-app xmltodict xml2dict natsort pandas numpy uniprot_tools pyteomics && copy app.yml.sample app.yml
+RUN C:/pulsar/venv/Scripts/activate.bat && pip install -r requirements.txt && pip install -r dev-requirements.txt && pip install pulsar-app xmltodict xml2dict natsort pandas numpy uniprot_tools pyteomics protobuf && copy app.yml.sample app.yml
 RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
 #Patch listed in https://github.com/galaxyproject/pulsar/issues/125 for directory issues...
 RUN sed -i "s#        pattern = r\"(#        directory = directory.replace('\\\\','\\\\\\\\')\n        pattern = r\"(#g" C:\\pulsar\\pulsar\\client\\staging\\up.py
