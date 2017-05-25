@@ -12,7 +12,7 @@ WORKDIR C:/skyline
 COPY Skyline-daily-64_3_6_1_10775.zip C:/skyline/
 RUN powershell -nologo -noprofile -command "& 7z.exe e Skyline-daily-64_3_6_1_10775.zip -y"
 RUN del Skyline-daily.exe.config
-COPY Skyline-daily.exe.config C:/skyline/
+COPY Skyline-daily.exe.config C:/skyline/SkylineCmd.exe.config
 COPY WOHL_MSSTATS_REPORT.skyr C:/skyline/
 COPY peak_boundaries.skyr C:/skyline/
 RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\skyline\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
