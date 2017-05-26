@@ -15,5 +15,5 @@ try:
 except:
     #maybe this host has patched the problem?
     subprocess.call(r'net use \\\\{0}\\allusers\\'.format(smb_ip))
-	subprocess.call(r'mklink /d '+'\\\\{0}\\allusers\\'.format(smb_ip)+'C:\\pulsar\\files\\staging')
+    subprocess.call(r'mklink /d '+'\\\\{0}\\allusers\\'.format(smb_ip)+'C:\\pulsar\\files\\staging')
 	
