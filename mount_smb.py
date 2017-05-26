@@ -11,10 +11,10 @@ corrected_smb_ip=smb_ip.rsplit(".",1)[0]+"."+str(int(smb_ip.rsplit(".",1)[1])+1)
 shutil.rmtree("C:\\pulsar\\files\\staging")
 try:
     subprocess.call('net use \\\\{0}\\allusers /user:test test'.format(corrected_smb_ip))
-	time.sleep(30)
+    time.sleep(30)
     subprocess.call('mklink /d '+'C:\\pulsar\\files\\staging '+'\\\\{0}\\allusers '.format(corrected_smb_ip),shell=True)
 except:
     #maybe this host has patched the problem?
-	subprocess.call('net use \\\\{0}\\allusers /user:test test'.format(smb_ip))
-	time.sleep(30)
+    subprocess.call('net use \\\\{0}\\allusers /user:test test'.format(smb_ip))
+    time.sleep(30)
     subprocess.call('mklink /d '+'C:\\pulsar\\files\\staging '+'\\\\{0}\\allusers '.format(smb_ip),shell=True)
