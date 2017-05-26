@@ -1,4 +1,4 @@
-import shutil, subprocess
+import os, subprocess
 import socket
 import time
 
@@ -8,7 +8,7 @@ smb_ip=socket.gethostbyname("milkyway-smb")
 
 corrected_smb_ip=smb_ip.rsplit(".",1)[0]+"."+str(int(smb_ip.rsplit(".",1)[1])+1)
 #print corrected_smb_ip
-shutil.rmtree("C:\\pulsar\\files\\staging")
+os.rmdir("C:\\pulsar\\files\\staging")
 try:
     subprocess.call('net use \\\\{0}\\allusers /user:test test'.format(corrected_smb_ip))
     time.sleep(30)
