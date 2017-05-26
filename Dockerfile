@@ -18,7 +18,8 @@ COPY peak_boundaries.skyr C:/skyline/
 RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\skyline\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 #We're going to grab pigz and add it to the skyline folder to keep it in the path...
-RUN wget --no-check-certificate https://downloads.sourceforge.net/project/pigzforwindows/pigz-2.3-bin-win32.zip
+#RUN wget --no-check-certificate https://downloads.sourceforge.net/project/pigzforwindows/pigz-2.3-bin-win32.zip
+RUN curl -L -k https://downloads.sourceforge.net/project/pigzforwindows/pigz-2.3-bin-win32.zip > pigz-2.3-bin-win32.zip
 RUN powershell -nologo -noprofile -command "& 7z.exe e pigz-2.3-bin-win32.zip -y"
 
 #Let's set up the virtualenv and install pulsar.
@@ -48,5 +49,6 @@ RUN rmdir /S /Q C:\pwiz
 RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files (x86)\ProteoWizard\ProteoWizard 3.0.10577\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 #Default startup command...
-
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
+RUN set-itemproperty -path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ServerPriorityTimeLimit -Value 0 -Type DWord
 CMD ["C:/pulsar/venv/Scripts/activate.bat && run.bat"]
