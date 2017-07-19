@@ -49,8 +49,11 @@ RUN rmdir /S /Q C:\pwiz
 RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files (x86)\ProteoWizard\ProteoWizard 3.0.10577\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 #This script is a workaround for Docker's "N-1" issue with Windows DNS resolution...
-COPY mount_smb.py C:/pulsar/mount_smb.py
+#COPY mount_smb.py C:/pulsar/mount_smb.py
+
+VOLUME C:/pulsar/files/staging
 
 #Default startup command...
-CMD ["C:/pulsar/venv/Scripts/activate.bat && python mount_smb.py && run.bat"]
+#CMD ["C:/pulsar/venv/Scripts/activate.bat && python mount_smb.py && run.bat"]
+CMD ["C:/pulsar/venv/Scripts/activate.bat && run.bat"]
 
