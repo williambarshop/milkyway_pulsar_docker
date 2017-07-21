@@ -54,7 +54,8 @@ RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_M
 #Windows 'G:' drive workaround (see https://blog.sixeyed.com/docker-volumes-on-windows-the-case-of-the-g-drive/ )
 VOLUME C:/pulsardata/
 RUN powershell -command Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' -Name 'G:' -Value "\??\C:\pulsardata" -Type String;
-COPY cleanup_volume.py C:/pulsar/cleanup_volume.py #This script actually is used to set up the volume with pulsar.
+COPY execute.py C:/pulsar/execute.py
 
 #Default startup command...
-CMD ["C:/pulsar/venv/Scripts/activate.bat && python cleanup_volume.py && cd G:/pulsar/ && G:/pulsar/run.bat"]
+CMD ["python execute.py"]
+#&& cd G:/pulsar/ && G:/pulsar/venv/Scripts/activate.bat && G:/pulsar/run.bat"]
