@@ -48,12 +48,13 @@ WORKDIR C:/pulsar
 RUN rmdir /S /Q C:\pwiz
 RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files (x86)\ProteoWizard\ProteoWizard 3.0.10577\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
-#This script is a workaround for Docker's "N-1" issue with Windows DNS resolution...
-COPY cleanup_volume.py C:/pulsar/cleanup_volume.py
 
-VOLUME C:/pulsar/files/staging
+
+
+#Windows 'G:' drive workaround (see https://blog.sixeyed.com/docker-volumes-on-windows-the-case-of-the-g-drive/ )
+VOLUME C:/pulsardata/
+RUN powershell -command Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' -Name 'G:' -Value "\??\C:\pulsardata" -Type String;
+COPY cleanup_volume.py C:/pulsar/cleanup_volume.py #This script actually is used to set up the volume with pulsar.
 
 #Default startup command...
-#CMD ["C:/pulsar/venv/Scripts/activate.bat && python mount_smb.py && run.bat"]
-CMD ["C:/pulsar/venv/Scripts/activate.bat && python cleanup_volume.py && run.bat"]
-
+CMD ["C:/pulsar/venv/Scripts/activate.bat && python cleanup_volume.py && cd G:/pulsar/ && G:/pulsar/run.bat"]
