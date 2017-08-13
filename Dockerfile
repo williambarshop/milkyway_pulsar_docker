@@ -9,8 +9,8 @@ RUN powershell -nologo -noprofile -command choco install 7zip.portable git pytho
 WORKDIR C:/ 
 RUN mkdir skyline
 WORKDIR C:/skyline
-COPY Skyline-daily-64_3_7_1_11099.zip C:/skyline/
-RUN powershell -nologo -noprofile -command "& 7z.exe e Skyline-daily-64_3_7_1_11099.zip -y"
+COPY Skyline-daily-64_3_7_1_11208.zip C:/skyline/
+RUN powershell -nologo -noprofile -command "& 7z.exe e Skyline-daily-64_3_7_1_11208.zip -y"
 RUN del Skyline-daily.exe.config
 COPY Skyline-daily.exe.config C:/skyline/SkylineCmd.exe.config
 COPY WOHL_MSSTATS_REPORT.skyr C:/skyline/
