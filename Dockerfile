@@ -48,9 +48,10 @@ RUN sed -i "s#        pattern = r\"(#        directory = directory.replace('\\\\
 WORKDIR C:/
 RUN mkdir pwiz
 
-COPY pwiz-setup-3.0.10577-x86.msi C:/pwiz/pwiz.msi
+#COPY pwiz-setup-3.0.10577-x86.msi C:/pwiz/pwiz.msi
 WORKDIR C:/pwiz/
-RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz.msi","/qb"]
+RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/bt83/490407:id/pwiz-setup-3.0.11383-x86_64.msi
+RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz-setup-3.0.11383-x86_64.msi","/qb"]
 
 WORKDIR C:/pulsar
 RUN rmdir /S /Q C:\pwiz
