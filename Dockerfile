@@ -10,10 +10,13 @@ WORKDIR C:/
 RUN mkdir skyline
 WORKDIR C:/skyline
 
-#Skyline copy and extract...
+
+#Skyline stable 3.7 11357 download and extract...
+RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/ProteoWizard_WindowsX8664SkylineReleaseBranchMsvcProfessional/486243:id/SkylineTester.zip
+RUN powershell -nologo -noprofile -command "& 7z.exe e SkylineTester.zip -y"
 #COPY Skyline-daily-64_3_7_1_11357.zip C:/skyline/skyline.zip
-COPY Skyline-64_3_7_0_11317.zip C:/skyline/skyline.zip
-RUN powershell -nologo -noprofile -command "& 7z.exe e skyline.zip -y"
+#COPY Skyline-64_3_7_0_11317.zip C:/skyline/skyline.zip
+#RUN powershell -nologo -noprofile -command "& 7z.exe e skyline.zip -y"
 
 
 RUN del Skyline-daily.exe.config
@@ -55,7 +58,7 @@ RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz-s
 
 WORKDIR C:/pulsar
 RUN rmdir /S /Q C:\pwiz
-RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files (x86)\ProteoWizard\ProteoWizard 3.0.10577\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
+RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files (x86)\ProteoWizard\ProteoWizard 3.0.11383\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 
 
