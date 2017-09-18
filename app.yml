@@ -7,7 +7,7 @@ staging_directory: files/staging
 managers:
   _default_:
     type: queued_python
-    num_concurrent_jobs: 4
+    num_concurrent_jobs: 3
 
 
 ## Mode to create job releated directories with. If unset
