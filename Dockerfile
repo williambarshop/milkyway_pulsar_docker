@@ -12,11 +12,13 @@ WORKDIR C:/skyline
 
 
 #Skyline stable 3.7 11357 download and extract...
-RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/ProteoWizard_WindowsX8664SkylineReleaseBranchMsvcProfessional/486243:id/SkylineTester.zip
-RUN powershell -nologo -noprofile -command "& 7z.exe e SkylineTester.zip -y"
-#COPY Skyline-daily-64_3_7_1_11357.zip C:/skyline/skyline.zip
-#COPY Skyline-64_3_7_0_11317.zip C:/skyline/skyline.zip
-#RUN powershell -nologo -noprofile -command "& 7z.exe e skyline.zip -y"
+#RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/ProteoWizard_WindowsX8664SkylineReleaseBranchMsvcProfessional/486243:id/SkylineTester.zip
+#RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/ProteoWizard_WindowsX8664SkylineReleaseBranchMsvcProfessional/531026:id/SkylineTester.zip
+#RUN powershell -nologo -noprofile -command "& 7z.exe e SkylineTester.zip -y"
+RUN curl -L -k https://skyline.ms/_webdav/home/software/Skyline/%40files/installers/Skyline-64_4_1_0_11796.zip > skyline.zip
+#COPY Skyline-daily-64_4_0_9_11707.zip C:/skyline/skyline.zip
+#COPY Skyline-64_4_1_0_11714.zip C:/skyline/skyline.zip
+RUN powershell -nologo -noprofile -command "& 7z.exe e skyline.zip -y"
 
 
 RUN del Skyline-daily.exe.config
@@ -56,8 +58,9 @@ RUN mkdir pwiz
 
 #COPY pwiz-setup-3.0.10577-x86.msi C:/pwiz/pwiz.msi
 WORKDIR C:/pwiz/
-RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/bt83/490407:id/pwiz-setup-3.0.11383-x86_64.msi
-RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz-setup-3.0.11383-x86_64.msi","/qb"]
+#RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/bt83/490407:id/pwiz-setup-3.0.11383-x86_64.msi
+RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/551603:id/pwiz-setup-3.0.11806-x86_64.msi
+RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz-setup-3.0.11806-x86_64.msi","/qb"]
 
 WORKDIR C:/pulsar
 RUN rmdir /S /Q C:\pwiz
