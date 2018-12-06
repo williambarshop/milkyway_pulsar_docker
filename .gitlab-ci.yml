@@ -14,12 +14,12 @@ docker build:
     - windows
   script:
     - docker info
-    - docker pull $CONTAINER_IMAGE:latest
-    - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:ci -t $CONTAINER_IMAGE:$CI_COMMIT_SHA .
+    - docker pull %CONTAINER_IMAGE%:latest
+    - docker build --cache-from %CONTAINER_IMAGE%:latest -t %CONTAINER_IMAGE%:ci -t %CONTAINER_IMAGE%:%CI_COMMIT_SHA% .
 
 docker push:
   stage: Push to Docker Hub
   only:
     - master
   script:
-    - docker push $CONTAINER_IMAGE:ci
+    - docker push %CONTAINER_IMAGE%:ci
