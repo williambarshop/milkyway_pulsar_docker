@@ -4,14 +4,15 @@ stages:
 
 variables:
   CONTAINER_IMAGE: wbarshop/milkyway_pulsar
-
+  
+before_script:
+  - docker login -u "%REGISTRY_USER%" -p "%REGISTRY_PASSWORD%"
   
 docker build:
   stage: Build image
   tags:
     - windows
   script:
-    - echo $REGISTRY_USER
     - docker info
     - docker pull $CONTAINER_IMAGE:latest
     - docker build --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:ci -t $CONTAINER_IMAGE:$CI_COMMIT_SHA .
