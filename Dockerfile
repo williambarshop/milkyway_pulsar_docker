@@ -66,15 +66,16 @@ WORKDIR C:/pwiz/
 #RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/604364:id/pwiz-setup-3.0.18199.78f1f2280-x86_64.msi
 #RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/610534:id/pwiz-setup-3.0.18215.f6864290f-x86_64.msi
 #RUN dir
-RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/619675:id/pwiz-setup-3.0.18236.f495f9016-x86_64.msi
-RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz-setup-3.0.18236.f495f9016-x86_64.msi","/qb"]
+#RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/619675:id/pwiz-setup-3.0.18236.f495f9016-x86_64.msi
+RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/666576:id/pwiz-setup-3.0.18337.a35d6ec04-x86_64.msi
+RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz-setup-3.0.18337.a35d6ec04-x86_64.msi","/qb"]
 
 ###WHEN YOU UPDATE PWIZ, MAKE SURE TO UPDATE $PATH SETTING BELOW
 
 
 WORKDIR C:/pulsar
 RUN rmdir /S /Q C:\pwiz
-RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files\ProteoWizard\ProteoWizard 3.0.18236.f495f9016\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
+RUN powershell -command $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path;$newPath=$oldPath+’;C:\Program Files\ProteoWizard\ProteoWizard 3.0.18337.a35d6ec04\’;Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
 
 
 #Windows 'G:' drive workaround (see https://blog.sixeyed.com/docker-volumes-on-windows-the-case-of-the-g-drive/ )
