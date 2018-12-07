@@ -4,6 +4,7 @@ MAINTAINER William Barshop, wbarshop@ucla.edu
 RUN ["powershell","-Command","iwr","https://chocolatey.org/install.ps1","-UseBasicParsing","|","iex"]
 #RUN powershell -nologo -noprofile -command choco install 7zip.portable -y
 RUN powershell -nologo -noprofile -command choco install 7zip.portable git python2 nuget.commandline gow vcredist2008 vcredist2013 vcredist2015 --execution-timeout 3500 -y
+#RUN powershell -nologo -noprofile -command choco install dotnet4.7.2 --execution-timeout 3500 -y
 
 #Install skyline and add it to the path
 WORKDIR C:/ 
@@ -59,7 +60,7 @@ RUN sed -i "s#        pattern = r\"(#        directory = directory.replace('\\\\
 WORKDIR C:/
 RUN mkdir pwiz
 
-#COPY pwiz-setup-3.0.10577-x86.msi C:/pwiz/pwiz.msi
+COPY pwiz-setup-3.0.11383-x86_64.msi C:/pwiz/pwiz.msi
 WORKDIR C:/pwiz/
 #RUN wget http://teamcity.labkey.org:8080/guestAuth/repository/download/bt83/490407:id/pwiz-setup-3.0.11383-x86_64.msi
 #RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/551603:id/pwiz-setup-3.0.11806-x86_64.msi
@@ -67,8 +68,9 @@ WORKDIR C:/pwiz/
 #RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/610534:id/pwiz-setup-3.0.18215.f6864290f-x86_64.msi
 #RUN dir
 #RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/619675:id/pwiz-setup-3.0.18236.f495f9016-x86_64.msi
-RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/666576:id/pwiz-setup-3.0.18337.a35d6ec04-x86_64.msi
-RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz-setup-3.0.18337.a35d6ec04-x86_64.msi","/qb"]
+#RUN wget http://teamcity.labkey.org/guestAuth/repository/download/bt83/666576:id/pwiz-setup-3.0.18337.a35d6ec04-x86_64.msi
+#RUN sleep 601
+RUN ["cmd","/S","/C","C:\\Windows\\syswow64\\msiexec.exe","/i","C:\\pwiz\\pwiz.msi","/qb"]
 
 ###WHEN YOU UPDATE PWIZ, MAKE SURE TO UPDATE $PATH SETTING BELOW
 
