@@ -19,6 +19,8 @@ docker build:
 
 docker push:
   stage: Push to Docker Hub
+  tags:
+    - windows
   only:
     - master
   script:
