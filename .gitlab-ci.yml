@@ -29,5 +29,7 @@ docker push:
     
 docker deploy:
   stage: swarm deploy
+  tags:
+    - windows
   script:
     - curl --request POST --form "token=%CI_JOB_TOKEN%" --form ref=master http://gitlab.glitterband/api/v4/projects/6/trigger/pipeline
