@@ -1,6 +1,7 @@
 stages:
   - Build image
   - Push to Docker Hub
+  - swarm deploy
 
 variables:
   CONTAINER_IMAGE: wbarshop/milkyway_pulsar
@@ -25,3 +26,8 @@ docker push:
     - master
   script:
     - docker push %CONTAINER_IMAGE%:ci
+    
+docker deploy:
+  stage: swarm deploy
+  script:
+    - curl --request POST --form "token=%CI_JOB_TOKEN%" --form ref=master http://gitlab.glitterband/api/v4/projects/6/trigger/pipeline
