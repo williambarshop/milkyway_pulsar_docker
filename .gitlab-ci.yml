@@ -12,7 +12,7 @@ before_script:
 docker build:
   stage: Build image
   tags:
-    - windows
+    - linux
   script:
     - docker info
     - docker pull %CONTAINER_IMAGE%:ci
@@ -21,7 +21,7 @@ docker build:
 docker push:
   stage: Push to Docker Hub
   tags:
-    - windows
+    - linux
   only:
     - master
   script:
@@ -32,4 +32,4 @@ docker deploy:
   tags:
     - windows
   script:
-    - curl --request POST --form "token=%CI_JOB_TOKEN%" --form ref=master http://gitlab.glitterband/api/v4/projects/3/trigger/pipeline
+    - curl --request POST --form "token=%CI_JOB_TOKEN%" --form ref=master http://gitlab/api/v4/projects/3/trigger/pipeline
