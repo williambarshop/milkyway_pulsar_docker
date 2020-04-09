@@ -1,4 +1,4 @@
-FROM chambm/pwiz-skyline-i-agree-to-the-vendor-licenses
+FROM chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:latest
 MAINTAINER William Barshop, wbarshop@ucla.edu
 
 RUN sudo apt-get update && sudo apt-get install \
@@ -21,11 +21,14 @@ WORKDIR /pulsar/
 #We also will set up the dependencies needed.
 RUN python3 -m venv venv && . venv/bin/activate && \
      pip3 install --upgrade pip setuptools && \
-     pip3 install pulsar-app \
+     pip3 install pulsar-app==0.12.1 && \
+     pip3 install -r requirements.txt
+
+RUN  . venv/bin/activate && python2.7 -m pip install numpy==1.16.4 && \
+         python2.7 -m pip install pandas==0.24.2 \
 	 xmltodict xml2dict natsort \
-	 pandas numpy uniprot_tools \
-	 pyteomics protobuf && \
-	 pip3 install -r requirements.txt 
+	 numpy uniprot_tools \
+	 pyteomics protobuf 
 
 #Set to listen on all interfaces
 RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
