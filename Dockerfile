@@ -28,7 +28,7 @@ RUN  . venv/bin/activate && python2.7 -m pip install numpy==1.16.4 && \
          python2.7 -m pip install pandas==0.24.2 \
 	 xmltodict xml2dict natsort \
 	 numpy uniprot_tools \
-	 pyteomics protobuf 
+	 pyteomics protobuf requests
 
 #Set to listen on all interfaces
 RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
