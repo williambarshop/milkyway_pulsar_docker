@@ -29,7 +29,7 @@ RUN  . venv/bin/activate && python2.7 -m pip install numpy==1.16.4 && \
 	 xmltodict xml2dict natsort \
 	 numpy uniprot_tools \
 	 pyteomics protobuf requests \
-         biopython
+         biopython joblib
 
 #Set to listen on all interfaces
 RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
