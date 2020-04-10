@@ -1,4 +1,5 @@
-FROM chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:3.0.19142-99710fd23
+FROM chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:latest
+#FROM chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:3.0.19142-99710fd23
 MAINTAINER William Barshop, wbarshop@ucla.edu
 
 RUN sudo apt-get update && sudo apt-get install \
@@ -36,6 +37,12 @@ RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
 
 #Set to four concurrent jobs with app.yml
 COPY app.yml /pulsar/app.yml
+
+#Copy config file to prevent compression of Skyline files  ### FIX DIRECTORY
+COPY Skyline.exe.config /wineprefix64/drive_c/pwiz/skyline/SkylineCmd.exe.config
+COPY Skyline.exe.config /wineprefix64/drive_c/pwiz/skyline/Skyline-Daily.exe.config
+COPY Skyline.exe.config /wineprefix64/drive_c/pwiz/skyline/Skyline.exe.config
+
 
 # Default execution entry...
 CMD sh -c ". /pulsar/venv/bin/activate && /pulsar/run.sh"
