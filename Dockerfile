@@ -1,4 +1,4 @@
-FROM chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:latest
+FROM chambm/pwiz-skyline-i-agree-to-the-vendor-licenses:3.0.19142-99710fd23
 MAINTAINER William Barshop, wbarshop@ucla.edu
 
 RUN sudo apt-get update && sudo apt-get install \
@@ -28,7 +28,8 @@ RUN  . venv/bin/activate && python2.7 -m pip install numpy==1.16.4 && \
          python2.7 -m pip install pandas==0.24.2 \
 	 xmltodict xml2dict natsort \
 	 numpy uniprot_tools \
-	 pyteomics protobuf requests
+	 pyteomics protobuf requests \
+         biopython
 
 #Set to listen on all interfaces
 RUN sed -i "s/host = localhost/host = 0.0.0.0/g" server.ini.sample
